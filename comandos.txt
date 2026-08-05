@@ -1,1 +1,53 @@
+-CLONAR REPOSITORIO-
 git clone https://github.com/Nicolas-Cbr/tp_git.git
+
+-GIT ADD, COMMIT, PUSH- 
+git status
+git add comandos.txt
+git commit -m "Agrego archivo comandos.txt"
+git push origin main
+
+-GIT RESTORE-
+git restore README.md
+
+-GIT INIT-
+git init
+
+-CREAR BRANCH Y PULL REQUEST-
+git checkout -b feature-1
+git add nuevo.txt
+git commit -m "Agrego nuevo.txt desde feature-1"
+git push origin feature-1
+- (PR creado y mergeado en GitHub)
+
+-ACTUALIZAR MAIN DESPUÉS DEL MERGE-
+git switch main
+git pull origin main
+
+-CONFLICTO ENTRE DOS BRANCHES-
+- Rama A
+git switch -c rama-A
+git add conflicto.txt
+git commit -m "Agrego conflicto.txt version A"
+git push -u origin rama-A
+# (PR de rama-A mergeado)
+
+- Rama B (creada sin actualizar main, a propósito)
+git switch main
+git switch -c rama-B
+git add conflicto.txt
+git commit -m "Agrego conflicto.txt version B"
+git push -u origin rama-B
+# (Al crear el PR, GitHub avisa: "This branch has conflicts that must be resolved")
+
+-RESOLVER EL CONFLICTO-
+git switch main
+git pull origin main
+git switch rama-B
+git merge main
+- Git marca conflicto en conflicto.txt con <<<<<<< ======= >>>>>>>
+- Se edita el archivo a mano, se borran las marcas
+git add conflicto.txt
+git commit -m "Resuelvo conflicto entre rama-A y rama-B"
+git push origin rama-B
+- (PR de rama-B mergeado con éxito)
